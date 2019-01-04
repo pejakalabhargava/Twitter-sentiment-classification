@@ -1,0 +1,110 @@
+
+=================================================================================================
+Twitter sentiment classification using R
+The goal of the project is to classify tweets from Twitter’s stream using R.
+==================================================================================================
+
+Implementation Language : R
+
+Details:
+platform       x86_64-apple-darwin13.1.0
+arch           x86_64
+os             darwin13.1.0
+system         x86_64, darwin13.1.0
+status
+major          3
+minor          1.1
+year           2014
+month          07
+day            10
+svn rev        66115
+language       R
+version.string R version 3.1.1 (2014-07-10)
+nickname       Sock it to Me
+
+==================================================================================================
+
+Required packages:
+  "twitteR"
+  "devtools"
+  "ROAuth"
+  "tm"
+  "SnowballC"
+  "RMOA"
+
+==================================================================================================
+Submission Details:
+
+The files attached in the submission are:
+model.R                        		: Contains methods for creation and rebuilding of the model
+preProcess.R                   		: Contains steps for preprocessing and feature selection
+setUp.R                        		: Installing and loading of the required libraries
+twitterUtility.R 					: Contains methods related to authentication and capturing tweets
+runTwitterClassifier.R         		: Contains the sample execution code
+twitterSentimentalClassifier.R 		: Connects the end to end logic, starting with authentication, preprocessing, feature selection
+									  and building the modeling
+==================================================================================================
+How to execute Code?
+
+Please run the instructions present in runTwitterClassifier.R file.
+
+Details are as below,
+
+STEP 1: Set the current working directory to the directory that contains the submission files
+			setwd("/path/to/submission/files")
+
+STEP 2: Source the included files as given
+			source("setUp.R")
+			source("twitterUtility.R")
+			source("preProcess.R")
+			source("model.R")
+			source("twitterSentimentalClassifier.R")
+
+STEP 3: Install/Load the required libraries by invoking
+			install.requiredPackages()
+			load.requiredLibraries()
+
+STEP 4: Add your consumer key, consumer secret, access key and access token.
+
+			consumer_api_key <- "YOUR CONSUMER KEY"
+			consumer_api_secret <- "YOUR CONSUMER SECRET"
+	      	access_token <- "YOUR ACCESS KEY"
+	      	access_token_secret <- "YOUR ACCESS TOKEN SECRET"
+
+STEP 5: invoke the classifyTweets methods with the corresponding parameters
+		
+		classifyTweets(numberOfTweetsForTest=200,NumberOfTweetsForTrain=600,numberOfIterations = 5,splitConfidence="0.7",
+    				   consumer_api_key,consumer_api_secret,access_token,access_token_secret)
+
+==================================================================================================
+INPUT:
+classifyTweets = function(numberOfTweetsForTest=300,NumberOfTweetsForTrain=3000,
+             numberOfIterations = 2,splitConfidence="0.5",consumer_api_key,consumer_api_secret,access_token,access_token_secret) {
+
+numberOfTweetsForTest				: The number of tweets to be used in the test set
+NumberOfTweetsForTrain				: The number of tweets to be used in the train set
+numberOfIterations					: Number of iteration of model rebuilding to be performed with as many newer test sets
+splitConfidence						: the value of splitConfidence to be specified for the HoeffdingTree
+consumer_api_key 					: The user's consumerKey string
+consumer_api_secret 				: The user's consumerSecret string
+access_token                 		: The user's access key
+access_token_secret               	: The user's access token secret
+
+
+==================================================================================================
+OUTPUT:
+
+Sample Output is as below,
+
+"---------------------------------------------------------------------------------------"
+"Confusion matrix is as follows:"
+
+modelPredict hate love
+        hate    8    9
+        love   17  153
+
+"Accuracy for the  1  iteration is: 86.096256684492"
+
+NOTE: 1) We could run the code successfully for Ubuntu and Mac OS.
+	    2) Make sure all the libraries are loaded properly.
+==================================================================================================
